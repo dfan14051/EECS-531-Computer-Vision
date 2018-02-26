@@ -38,7 +38,7 @@ for r=1:rh
             RI(r:r+th-1, c, 1) = 255;
             RI(r:r+th-1, c, 2) = 0;
             RI(r:r+th-1, c, 3) = 255;
-
+            
             RI(r:r+th-1, c+tw-1, 1) = 255;
             RI(r:r+th-1, c+tw-1, 2) = 0;
             RI(r:r+th-1, c+tw-1, 3) = 255;
