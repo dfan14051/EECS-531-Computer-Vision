@@ -1,0 +1,738 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{A5}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{EECS 531: Computer Vision Assignment
+5}\label{eecs-531-computer-vision-assignment-5}
+
+\textbf{David Fan}
+
+5/2/18
+
+    In this notebook we will be translating the geometric computer vision
+demo from MATLAB into Python and explaining what each section of the
+code does with math and relevant background.
+
+    \subsection{Prerequisites}\label{prerequisites}
+
+These are different from the demo since the ones in the demo are about
+setting up the Jupyter MATLAB kernel. Here we'll just be doing our
+standard imports.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{k+kn}{from} \PY{n+nn}{mpl\PYZus{}toolkits}\PY{n+nn}{.}\PY{n+nn}{mplot3d} \PY{k}{import} \PY{n}{Axes3D}
+         \PY{k+kn}{import} \PY{n+nn}{mpl\PYZus{}toolkits}\PY{n+nn}{.}\PY{n+nn}{mplot3d} \PY{k}{as} \PY{n+nn}{a3}
+         \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k}{import} \PY{n}{patches}
+\end{Verbatim}
+
+
+    \subsection{Build a Simple Virtual
+World}\label{build-a-simple-virtual-world}
+
+\subsubsection{Add something into the
+world}\label{add-something-into-the-world}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k}{def} \PY{n+nf}{create\PYZus{}points}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            \PY{p}{[}\PY{n}{Z}\PY{p}{,} \PY{n}{Y}\PY{p}{,} \PY{n}{X}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{meshgrid}\PY{p}{(}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mf}{0.}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{]}\PY{p}{,} \PY{n}{indexing} \PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ij}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{} This could easily be wrong. MATLAB matrix to Numpy array conversion can get hairy.}
+            \PY{c+c1}{\PYZsh{} The line below attempts to match the matlab line: `points = [X(:), Y(:), Z(:)];`}
+            \PY{c+c1}{\PYZsh{} The difference between row major and column major may cause issues down the line though.}
+            \PY{n}{points} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{column\PYZus{}stack}\PY{p}{(}\PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{flatten}\PY{p}{(}\PY{n}{order}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{F}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,} \PY{n}{Y}\PY{o}{.}\PY{n}{flatten}\PY{p}{(}\PY{n}{order}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{F}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,} \PY{n}{Z}\PY{o}{.}\PY{n}{flatten}\PY{p}{(}\PY{n}{order}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{F}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{} No clue how to replicate MATLAB\PYZsq{}s Jet function}
+            \PY{n}{colors} \PY{o}{=} \PY{k+kc}{None}
+            
+            \PY{k}{return} \PY{p}{(}\PY{n}{points}\PY{p}{,} \PY{n}{colors}\PY{p}{)}
+\end{Verbatim}
+
+
+    This function is appropriately named. It returns a set of coordinates
+for points to be plotted later on as well as a color value for each
+point from the Jet colormap.
+
+    \subsubsection{Plot the points}\label{plot-the-points}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{k}{def} \PY{n+nf}{plot\PYZus{}points}\PY{p}{(}\PY{n}{points}\PY{p}{,} \PY{n}{colors}\PY{p}{,} \PY{n}{size} \PY{o}{=} \PY{l+m+mi}{50}\PY{p}{)}\PY{p}{:}
+             \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{projection}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{points}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{points}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{points}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{n}{colors}\PY{p}{,} \PY{n}{size}\PY{p}{)}
+             \PY{k}{return} \PY{p}{(}\PY{n}{fig}\PY{p}{,} \PY{n}{ax}\PY{p}{)}
+\end{Verbatim}
+
+
+    This is relatively straight forward. It simply creates a 3D scatter plot
+using a set of points and colors.
+
+    \subsubsection{Set up a pair of cameras}\label{set-up-a-pair-of-cameras}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{k}{def} \PY{n+nf}{preset\PYZus{}cameras}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            \PY{n}{r} \PY{o}{=} \PY{l+m+mi}{5}
+            \PY{n}{focal\PYZus{}length} \PY{o}{=} \PY{l+m+mf}{0.06}
+            \PY{n}{width} \PY{o}{=} \PY{l+m+mi}{256}
+            \PY{n}{height} \PY{o}{=} \PY{l+m+mi}{256}
+            \PY{n}{film\PYZus{}width} \PY{o}{=} \PY{l+m+mf}{0.035}
+            \PY{n}{film\PYZus{}height} \PY{o}{=} \PY{l+m+mf}{0.035}
+            
+            \PY{n}{alpha} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{/}\PY{l+m+mi}{6}
+            \PY{n}{beta} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{/}\PY{l+m+mi}{6}
+            \PY{n}{cam1} \PY{o}{=} \PY{p}{\PYZob{}}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{position}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{n}{r} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{n}{beta}\PY{p}{)} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{n}{alpha}\PY{p}{)} \PY{p}{,}  \PY{n}{r} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{n}{beta}\PY{p}{)} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{alpha}\PY{p}{)}\PY{p}{,} \PY{n}{r} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{beta}\PY{p}{)}\PY{p}{]}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{up}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{focal\PYZus{}length}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{focal\PYZus{}length}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{film\PYZus{}width}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{film\PYZus{}width}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{film\PYZus{}height}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{film\PYZus{}height}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{width}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{width}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{height}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{height}
+            \PY{p}{\PYZcb{}}
+            
+            \PY{n}{alpha} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{/}\PY{l+m+mi}{3}
+            \PY{n}{beta} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{/}\PY{l+m+mi}{6}
+            \PY{n}{cam2} \PY{o}{=} \PY{p}{\PYZob{}}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{position}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{n}{r} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{n}{beta}\PY{p}{)} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{n}{alpha}\PY{p}{)} \PY{p}{,}  \PY{n}{r} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{n}{beta}\PY{p}{)} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{alpha}\PY{p}{)}\PY{p}{,} \PY{n}{r} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{beta}\PY{p}{)}\PY{p}{]}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{up}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{focal\PYZus{}length}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{focal\PYZus{}length}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{film\PYZus{}width}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{film\PYZus{}width}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{film\PYZus{}height}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{film\PYZus{}height}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{width}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{width}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{height}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{height}
+            \PY{p}{\PYZcb{}}
+            
+            \PY{k}{return} \PY{p}{(}\PY{n}{cam1}\PY{p}{,} \PY{n}{cam2}\PY{p}{)}
+\end{Verbatim}
+
+
+    This function creates two dictionaries representing the two camera
+objects. The dictionaries store the cameras' values. Specifically: - the
+camera's position in space - the focal point (target) of the camera -
+the up direction of the camera, the focal length of the camera - the
+sensor height and width, and - the number of horizontal and vertical
+pixels (width and height).
+
+    \subsubsection{Plot camera}\label{plot-camera}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{k}{def} \PY{n+nf}{camera\PYZus{}coordinate\PYZus{}system}\PY{p}{(}\PY{n}{cam}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} The axis of camera coordinate system}
+            \PY{c+c1}{\PYZsh{} prinicipal axis}
+            \PY{n}{zcam} \PY{o}{=} \PY{n}{cam}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{cam}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{position}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+            
+            \PY{c+c1}{\PYZsh{} x axis should pend to principal axis and up direction}
+            \PY{n}{xcam} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{cross}\PY{p}{(}\PY{n}{zcam}\PY{p}{,} \PY{n}{cam}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{up}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{} y axis should pend to principal axis and principal axis}
+            \PY{n}{ycam} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{cross}\PY{p}{(}\PY{n}{zcam}\PY{p}{,} \PY{n}{xcam}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{} normalize to unit vector}
+            \PY{n}{zcam} \PY{o}{=} \PY{n}{zcam} \PY{o}{/} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{zcam}\PY{p}{)}
+            \PY{n}{xcam} \PY{o}{=} \PY{n}{xcam} \PY{o}{/} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{xcam}\PY{p}{)}
+            \PY{n}{ycam} \PY{o}{=} \PY{n}{ycam} \PY{o}{/} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{ycam}\PY{p}{)}
+            
+            \PY{n}{origin} \PY{o}{=} \PY{n}{cam}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{position}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+            
+            \PY{k}{return} \PY{p}{(}\PY{n}{xcam}\PY{p}{,} \PY{n}{ycam}\PY{p}{,} \PY{n}{zcam}\PY{p}{,} \PY{n}{origin}\PY{p}{)}
+\end{Verbatim}
+
+
+    This function computes the coordinate system based on the input camera.
+Z is along the principal axis, X is perpendicular to the principal axis
+and runs up, and Y is perpendicular to both. It also returns the origin
+value of the coordinate system.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{k}{def} \PY{n+nf}{plot\PYZus{}camera}\PY{p}{(}\PY{n}{fig}\PY{p}{,} \PY{n}{ax}\PY{p}{,} \PY{n}{cam}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{p}{[}\PY{l+m+mf}{0.75}\PY{p}{,} \PY{l+m+mf}{0.75}\PY{p}{,} \PY{l+m+mf}{0.75}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+             \PY{k}{if} \PY{n}{label}\PY{p}{:}
+                 \PY{n}{ax}\PY{o}{.}\PY{n}{text}\PY{p}{(}\PY{n}{cam}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{position}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{cam}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{position}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{cam}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{position}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{n}{label}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} Compute the camera coordinate system}
+             \PY{n}{xcam}\PY{p}{,} \PY{n}{ycam}\PY{p}{,} \PY{n}{zcam}\PY{p}{,} \PY{n}{origin} \PY{o}{=} \PY{n}{camera\PYZus{}coordinate\PYZus{}system}\PY{p}{(}\PY{n}{cam}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} The four corners of the rectangle}
+             \PY{c+c1}{\PYZsh{} on the plane through focal points}
+             \PY{n}{d} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{cam}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{cam}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{position}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+             \PY{n}{x} \PY{o}{=} \PY{l+m+mf}{0.5} \PY{o}{*} \PY{n}{cam}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{film\PYZus{}width}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{*} \PY{n}{d} \PY{o}{/} \PY{n}{cam}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{focal\PYZus{}length}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+             \PY{n}{y} \PY{o}{=} \PY{l+m+mf}{0.5} \PY{o}{*} \PY{n}{cam}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{film\PYZus{}height}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{*} \PY{n}{d} \PY{o}{/} \PY{n}{cam}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{focal\PYZus{}length}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+             
+             \PY{n}{P1} \PY{o}{=} \PY{n}{origin} \PY{o}{+} \PY{n}{x} \PY{o}{*} \PY{n}{xcam} \PY{o}{+} \PY{n}{y} \PY{o}{*} \PY{n}{ycam} \PY{o}{+} \PY{n}{d} \PY{o}{*} \PY{n}{zcam}
+             \PY{n}{P2} \PY{o}{=} \PY{n}{origin} \PY{o}{+} \PY{n}{x} \PY{o}{*} \PY{n}{xcam} \PY{o}{\PYZhy{}} \PY{n}{y} \PY{o}{*} \PY{n}{ycam} \PY{o}{+} \PY{n}{d} \PY{o}{*} \PY{n}{zcam}
+             \PY{n}{P3} \PY{o}{=} \PY{n}{origin} \PY{o}{\PYZhy{}} \PY{n}{x} \PY{o}{*} \PY{n}{xcam} \PY{o}{\PYZhy{}} \PY{n}{y} \PY{o}{*} \PY{n}{ycam} \PY{o}{+} \PY{n}{d} \PY{o}{*} \PY{n}{zcam}
+             \PY{n}{P4} \PY{o}{=} \PY{n}{origin} \PY{o}{\PYZhy{}} \PY{n}{x} \PY{o}{*} \PY{n}{xcam} \PY{o}{+} \PY{n}{y} \PY{o}{*} \PY{n}{ycam} \PY{o}{+} \PY{n}{d} \PY{o}{*} \PY{n}{zcam}
+             
+             \PY{c+c1}{\PYZsh{} Function to draw a line segment (p1, p2)}
+             \PY{n}{connect} \PY{o}{=} \PY{k}{lambda} \PY{n}{p1}\PY{p}{,} \PY{n}{p2}\PY{p}{:} \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{[}\PY{n}{p1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{p2}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{n}{p1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{p2}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{n}{color}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} Plot line connect camera and target}
+             \PY{n}{connect}\PY{p}{(}\PY{n}{cam}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{position}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{cam}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} Plot line connect P1, P2, P3, P4}
+             \PY{n}{Patch}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{o}{.}\PY{o}{.}
+\end{Verbatim}
+
+
+    This plotting function plots a visual representation of the input camera
+coordinate system. It plots the rectangle that the camera is viewing and
+draws lines leading back to the origin.
+
+Unfortunately, there's really no good Pythonic equivalent of the matlab
+Patch function that does what the demo does so it seems my translation
+efforts end here. Maybe if I had more time I could try to hack a
+solution together, but unfortunately I don't have time for more than
+just a direct translation so the notebook won't actually run all
+together, but the idea should be there.
+
+    \subsection{Show the Virtual World}\label{show-the-virtual-world}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{points}\PY{p}{,} \PY{n}{colors} \PY{o}{=} \PY{n}{create\PYZus{}points}\PY{p}{(}\PY{p}{)}
+         \PY{n}{cam1}\PY{p}{,} \PY{n}{cam2} \PY{o}{=} \PY{n}{preset\PYZus{}cameras}\PY{p}{(}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} print(\PYZsq{}points: \PYZbs{}n\PYZsq{}, points)}
+         \PY{c+c1}{\PYZsh{} print(\PYZsq{}colors: \PYZbs{}n\PYZsq{}, colors)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{camera 1: }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{cam1}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{camera 2: }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{cam2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+camera 1: 
+ \{'position': [3.7500000000000004, 2.1650635094610964, 2.4999999999999996], 'target': [0, 0, 0], 'up': [0, 0, 1], 'focal\_length': 0.06, 'film\_width': 0.035, 'film\_height': 0.035, 'width': 256, 'height': 256\}
+
+camera 2: 
+ \{'position': [2.1650635094610973, 3.75, 2.4999999999999996], 'target': [0, 0, 0], 'up': [0, 0, 1], 'focal\_length': 0.06, 'film\_width': 0.035, 'film\_height': 0.035, 'width': 256, 'height': 256\}
+
+    \end{Verbatim}
+
+    Not much to say here. Just calling the methods from earlier.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{def} \PY{n+nf}{lookthrough}\PY{p}{(}\PY{n}{cam}\PY{p}{)}\PY{p}{:}
+            \PY{o}{.}\PY{o}{.}\PY{o}{.}
+\end{Verbatim}
+
+
+    Not actually sure what the MATLAB does here... It sets the axes to the
+various camera axes.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plot\PYZus{}points}\PY{p}{(}\PY{n}{points}\PY{p}{,} \PY{n}{colors}\PY{p}{,} \PY{l+m+mi}{50}\PY{p}{)}
+        \PY{n}{plot\PYZus{}camera}\PY{p}{(}\PY{n}{fig}\PY{p}{,} \PY{n}{ax}\PY{p}{,} \PY{n}{cam1}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cam1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+        \PY{n}{plot\PYZus{}camera}\PY{p}{(}\PY{n}{fig}\PY{p}{,} \PY{n}{ax}\PY{p}{,} \PY{n}{cam2}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cam2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The virtual world}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        
+        \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plot\PYZus{}points}\PY{p}{(}\PY{n}{points}\PY{p}{,} \PY{n}{colors}\PY{p}{,} \PY{l+m+mi}{50}\PY{p}{)}
+        \PY{n}{plot\PYZus{}camera}\PY{p}{(}\PY{n}{fig}\PY{p}{,} \PY{n}{ax}\PY{p}{,} \PY{n}{cam1}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+        \PY{n}{lookthrough}\PY{p}{(}\PY{n}{cam1}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Look through camera 1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        
+        \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plot\PYZus{}points}\PY{p}{(}\PY{n}{points}\PY{p}{,} \PY{n}{colors}\PY{p}{,} \PY{l+m+mi}{50}\PY{p}{)}
+        \PY{n}{plot\PYZus{}camera}\PY{p}{(}\PY{n}{fig}\PY{p}{,} \PY{n}{ax}\PY{p}{,} \PY{n}{cam2}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+        \PY{n}{lookthrough}\PY{p}{(}\PY{n}{cam2}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Look through camera 2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    Plots the virtual world and the view through each camera.
+
+    \subsection{Camera Model}\label{camera-model}
+
+\subsubsection{Euclidean transformation
+matrix}\label{euclidean-transformation-matrix}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{k}{def} \PY{n+nf}{ExtrinsicsMtx}\PY{p}{(}\PY{n}{cam}\PY{p}{)}\PY{p}{:}
+             \PY{n}{xcam}\PY{p}{,} \PY{n}{ycam}\PY{p}{,} \PY{n}{zcam}\PY{p}{,} \PY{n}{origin} \PY{o}{=} \PY{n}{camera\PYZus{}coordinate\PYZus{}system}\PY{p}{(}\PY{n}{cam}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} Rotation matrix}
+             \PY{n}{R} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{stack}\PY{p}{(}\PY{p}{[}\PY{n}{xcam}\PY{p}{,} \PY{n}{ycam}\PY{p}{,} \PY{n}{zcam}\PY{p}{]}\PY{p}{)}
+             \PY{n}{M} \PY{o}{=} \PY{p}{[}\PY{n}{R}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{origin}\PY{p}{,} \PY{n}{R}\PY{p}{)}\PY{p}{]}
+             \PY{k}{return} \PY{n}{M}
+\end{Verbatim}
+
+
+    The first step in transforming the coordinate system from Camera to
+World is to perform a Euclidean transformation on the Camera coordinate
+system.
+
+\[
+\begin{pmatrix}
+X_{cam} \\
+Y_{cam} \\
+Z_{cam} \\
+1
+\end{pmatrix}
+=
+\begin{bmatrix}
+R & \mathbf{t} \\
+\mathbf{O}^T & 1
+\end{bmatrix}
+\begin{pmatrix}
+X \\
+Y \\
+Z \\
+1
+\end{pmatrix}
+\]
+
+Here \(R\) is a \(3 \times 3\) rotation matrix and \(\mathbf t\) is a
+\(3 \times 1\) translation vector.
+
+    \subsubsection{Camera calibration
+matrix}\label{camera-calibration-matrix}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{k}{def} \PY{n+nf}{IntrinsicsMtx}\PY{p}{(}\PY{n}{cam}\PY{p}{)}\PY{p}{:}
+             \PY{n}{cx} \PY{o}{=} \PY{p}{(}\PY{n}{cam}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{width}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)} \PY{o}{*} \PY{o}{.}\PY{l+m+mi}{5}
+             \PY{n}{cy} \PY{o}{=} \PY{p}{(}\PY{n}{cam}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{height}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)} \PY{o}{*} \PY{o}{.}\PY{l+m+mi}{5}
+             
+             \PY{n}{fx} \PY{o}{=} \PY{n}{cam}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{focal\PYZus{}length}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{*} \PY{n}{cam}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{width}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{/} \PY{n}{cam}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{film\PYZus{}width}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+             \PY{n}{fy} \PY{o}{=} \PY{n}{cam}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{focal\PYZus{}length}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{*} \PY{n}{cam}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{height}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{/} \PY{n}{cam}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{film\PYZus{}height}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+             
+             \PY{n}{K} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{n}{fx}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{fy}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{n}{cx}\PY{p}{,} \PY{n}{cy}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+             \PY{k}{return} \PY{n}{K}
+\end{Verbatim}
+
+
+    The step above constructs the camera calibration matrix: \[
+K = 
+\begin{bmatrix}
+\alpha_x & &x_0 \\
+&\alpha_y & y_0 \\
+&&1
+\end{bmatrix}
+\]
+
+Where \(\alpha_x\) and \(alpha_y\) are the scaling parameters in the
+image \(x\) and \(y\) directions and \((x_0, y_0)\) is the principal
+point, the point where the optic axis intersects the image plane.
+
+Of note is that the aspect ratio of the image is equal to:
+\(\alpha_y/\alpha_x\)
+
+The camera matrix is important because:
+
+\[
+\mathbf{x} =
+\begin{pmatrix}
+x\\y\\1
+\end{pmatrix} = 
+\frac{1}{f}
+\begin{bmatrix}
+\alpha_x & &x_0 \\
+&\alpha_y & y_0 \\
+&&1
+\end{bmatrix}
+\begin{pmatrix}
+x_{cam}\\y_{cam}\\f
+\end{pmatrix} =
+K
+\begin{pmatrix}
+x_{cam}\\y_{cam}\\f
+\end{pmatrix}
+\]
+
+    \subsubsection{Camera matrix}\label{camera-matrix}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{k}{def} \PY{n+nf}{CameraMtx}\PY{p}{(}\PY{n}{cam}\PY{p}{)}\PY{p}{:}
+             \PY{n}{M} \PY{o}{=} \PY{n}{ExtrinsicsMtx}\PY{p}{(}\PY{n}{cam}\PY{p}{)}
+             \PY{n}{K} \PY{o}{=} \PY{n}{IntrinsicsMtx}\PY{p}{(}\PY{n}{cam}\PY{p}{)}
+             \PY{n}{P} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{M}\PY{p}{,} \PY{n}{K}\PY{p}{)}
+             \PY{k}{return} \PY{n}{P}
+\end{Verbatim}
+
+
+    Here we calculate the Camera Matrix \(P\): \[
+P = K
+\begin{bmatrix}
+1 & 0&0&0\\
+0&1&0&0\\
+0&0&1&0
+\end{bmatrix}
+M
+\]
+
+and \[
+\mathbf x = P\mathbf X
+\] Thus we have defined the \(3x4\) projection matrix from Euclidean
+3-space to an image.
+
+    \subsubsection{Generate the image pair}\label{generate-the-image-pair}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{o}{.}\PY{o}{.}\PY{o}{.}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+          File "<ipython-input-26-82cca958dda9>", line 1
+        def world2image(cam, points3d):
+                                       \^{}
+    SyntaxError: unexpected EOF while parsing
+
+
+    \end{Verbatim}
+
+    Here in the demo are a few functions that plot the projected points as
+images using the above functions. As my translation no longer actually
+works, there wasn't much point to translating this plotting code. If the
+above ever gets fixed then the plotting code should go here.
+
+    \subsection{Triangulation}\label{triangulation}
+
+"Given the cameras and point pairs, reconstruct the 3D positions in
+world coordinates of the point pairs."
+
+\subsubsection{Linear triangulation
+method}\label{linear-triangulation-method}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{k}{def} \PY{n+nf}{triangulate}\PY{p}{(}\PY{n}{points1}\PY{p}{,} \PY{n}{points2}\PY{p}{,} \PY{n}{P1}\PY{p}{,} \PY{n}{P2}\PY{p}{)}\PY{p}{:}
+             \PY{n}{num\PYZus{}points} \PY{o}{=} \PY{n}{points1}\PY{o}{.}\PY{n}{size}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+             \PY{n}{points3d} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{num\PYZus{}points}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} iterate over point pairs}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{num\PYZus{}points}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{points3d}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{triangulationOnePoint}\PY{p}{(}\PY{n}{points1}\PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{o}{.}\PY{n}{T}\PY{p}{,} \PY{n}{points2}\PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{o}{.}\PY{n}{T}\PY{p}{,} \PY{n}{P1}\PY{o}{.}\PY{n}{T}\PY{p}{,} \PY{n}{P2}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+             \PY{k}{return} \PY{n}{points3d}
+\end{Verbatim}
+
+
+    This function is relatively simple as the next helper function is the
+one that does the heavy lifting. This one just iterates over all point
+pairs in the two sets of points and passes them to the helper function.
+The return is used to set the 3D reconstruction coordinates.
+
+The problem of triangulation can be formatted such that:
+
+If we know: * \(P\) and \(P'\) * \(\mathbf x\) and \(\mathbf x'\) We
+compute the reconstruction, \(\hat{x}\).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{k}{def} \PY{n+nf}{triangulationOnePoint}\PY{p}{(}\PY{n}{point1}\PY{p}{,} \PY{n}{point2}\PY{p}{,} \PY{n}{P1}\PY{p}{,} \PY{n}{P2}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} Construct A}
+             \PY{n}{A} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
+             \PY{n}{A}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{=} \PY{n}{point1}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{P1}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{P1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}
+             \PY{n}{A}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{:}\PY{l+m+mi}{4}\PY{p}{]} \PY{o}{=} \PY{n}{point2}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{P2}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{P2}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}
+             
+             \PY{c+c1}{\PYZsh{} Solve the optimization problem: min\PYZus{}x ||Ax|| s.t. ||x||=1}
+             \PY{n}{\PYZus{}}\PY{p}{,}\PY{n}{\PYZus{}}\PY{p}{,}\PY{n}{V} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{svd}\PY{p}{(}\PY{n}{A}\PY{p}{)}
+             \PY{n}{X} \PY{o}{=} \PY{n}{V}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+             \PY{n}{X} \PY{o}{=} \PY{n}{X}\PY{o}{/}\PY{n}{X}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+             
+             \PY{c+c1}{\PYZsh{} Homogenous \PYZhy{}\PYZgt{} Inhomogenous}
+             \PY{n}{point3d} \PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{3}\PY{p}{]}
+             \PY{k}{return} \PY{n}{point3d}
+\end{Verbatim}
+
+
+    Here we are calculating the actual reconstruction of each point for each
+point pair. We do this by solving the system of linear equations:
+
+\[
+\begin{bmatrix}
+x\mathbf p^{3T} - \mathbf p^{1T}\\
+y\mathbf p^{3T} - \mathbf p^{2T}\\
+x'\mathbf p'^{3T} - \mathbf p'^{1T}\\
+x\mathbf p'^{3T} - \mathbf p'^{2T}
+\end{bmatrix}
+\mathbf x
+=
+0
+\]
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{o}{.}\PY{o}{.}\PY{o}{.}
+\end{Verbatim}
+
+
+    The rest is just plotting stuff to see the reconstruction!
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
